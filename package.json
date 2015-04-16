@@ -1,0 +1,29 @@
+{
+  "name": "ehlo",
+  "version": "0.0.1",
+  "description": "SMTP server to rest",
+  "main": "ehlo.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "start": "./cli.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/opendena/ehlo.git"
+  },
+  "keywords": [
+    "SMTP",
+    "rest",
+    "ehlo",
+    "API"
+  ],
+  "author": "OpenDena",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/opendena/ehlo/issues"
+  },
+  "homepage": "https://github.com/opendena/ehlo"
+}
