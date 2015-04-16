@@ -1,0 +1,29 @@
+globals:
+  angular: true
+  jQuery: true
+  $: true
+  define: true
+  require: true
+  exports: true
+  module: true
+  describe: true
+  before: true
+  beforeEach: true
+  after: true
+  afterEach: true
+  it: true
+  inject: true
+  expect: true
+  process: true
+  ApplicationConfiguration: true
+  console: true
+  Buffer: true
+  __dirname: true
+
+rules:
+  quotes: simple
+  max-len: [1, 80, 2]
+  comma-style: [2, "first"]
+  global-strict: [2, "always"]
+  strict: [2, "global"]
+  no-console: false

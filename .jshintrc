@@ -1,0 +1,39 @@
+{
+  "node": true,
+  "browser": true,
+  "curly": true,
+  "indent": 2,
+  "strict": true,
+  "trailing": true,
+  "smarttabs": true,
+  "regexp": true,
+  "undef": true,
+  "camelcase": true,
+  "asi": false,
+  "lastsemic": true,
+  "maxerr": 1000,
+  "noempty": true,
+  "laxcomma": true,
+  "newcap": false,
+  "globals": { // Globals variables.
+    "jasmine": true,
+    "angular": true,
+    "ApplicationConfiguration": true,
+    "jQuery": true,
+    "$": true
+  },
+  "predef": [ // Extra globals.
+    "define",
+    "require",
+    "exports",
+    "module",
+    "describe",
+    "before",
+    "beforeEach",
+    "after",
+    "afterEach",
+    "it",
+    "inject",
+    "expect"
+  ]
+}
