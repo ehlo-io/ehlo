@@ -25,5 +25,8 @@
   "bugs": {
     "url": "https://github.com/opendena/ehlo/issues"
   },
-  "homepage": "https://github.com/opendena/ehlo"
+  "homepage": "https://github.com/opendena/ehlo",
+  "dependencies": {
+    "smtp-server": "^1.2.0"
+  }
 }
