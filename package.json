@@ -28,6 +28,7 @@
   "homepage": "https://github.com/opendena/ehlo",
   "dependencies": {
     "mailparser": "^0.5.0",
-    "smtp-server": "^1.2.0"
+    "smtp-server": "^1.2.0",
+    "stream-to-buffer": "^0.1.0"
   }
 }
