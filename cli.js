@@ -2,7 +2,11 @@
 'use strict';
 
 var ehlo = require('./ehlo.js');
-ehlo.start();
+ehlo
+  .use(require('./lib/middleware.parse'))
+  .use(require('./lib/middleware.smtp.250'))
+  .start()
+;
 
 process.on('SIGINT', function() {
   ehlo.stop();
