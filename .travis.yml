@@ -5,8 +5,10 @@ node_js:
 env:
   global:
   - secure: OM+SbUzZ/E4pGtj9UZ43Rpu0FN7x/AdmWeG/N4EIUVf8KD7I2NaV/XEf2XLJCAiKCCmG1w9KiarFTNymupi1bxTuCL2qEpnpg846kFcL8pxxRyAe7JnAVYLfCapWDZZEJo4iGv+uabmPNONYB/81kGUvIhcFyXxYzLDCYaFBF7s=
+  - secure: BELyNHkwLpHIjx4JTED8Ih7ZVQwElA2xeucRlDwa2c+t8l3EJ4dcuQq9uSCc+hXrZw55ooJMiCJCz3HTCPeCMbMryUFGy34Doj1EpSd2Ots6lsisYGx7i89lT32vvxHna0n4nUPNX2o7KQ0+waF/VtHK5mCZ7+NmkEvxmWv8+I4=
 before_script:
 - echo "repo_token="$COVERALLS_REPO_TOKEN > .coveralls.yml
 script:
 - npm test
 - npm run codacy
+- npm run coveralls
