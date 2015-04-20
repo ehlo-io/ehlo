@@ -37,7 +37,8 @@
     "mailparser": "^0.5.0",
     "request": "^2.55.0",
     "smtp-server": "^1.2.0",
-    "stream-to-buffer": "^0.1.0"
+    "stream-to-buffer": "^0.1.0",
+    "winston": "^1.0.0"
   },
   "devDependencies": {
     "codacy-coverage": "^1.0.3",
