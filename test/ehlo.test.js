@@ -55,9 +55,12 @@ describe('ehlo', function() {
   it('ehlo.start without middleware', function(done) {
     port++;
     var ehlo = new Ehlo({port: port});
-    // ehlo.start();
-    // sendMailFixture1(null, done);
-    done();
+    ehlo.on('error', function(err) {
+      assert.equal(err, 'No middleware matching');
+      done();
+    });
+    ehlo.start();
+    sendMailFixture1();
   });
 
   it('ehlo.use with string middleware', function(done) {
