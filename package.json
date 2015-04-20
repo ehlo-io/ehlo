@@ -1,10 +1,13 @@
 {
   "name": "ehlo",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "SMTP server to rest",
   "main": "ehlo.js",
   "directories": {
     "test": "test"
+  },
+  "bin": {
+    "ehlo": "cli.js"
   },
   "scripts": {
     "start": "./cli.js",
