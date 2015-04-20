@@ -64,7 +64,7 @@ describe('ehlo', function() {
   });
 
   it('ehlo.use with string middleware', function(done) {
-    var ehlo = new Ehlo({port: port});
+    var ehlo = new Ehlo();
     assert.throws(
       function() {
         ehlo.use('string test');
