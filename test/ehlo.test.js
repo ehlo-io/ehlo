@@ -3,16 +3,40 @@
 var assert = require('assert')
   , fs = require('fs')
   , SMTPConnection = require('smtp-connection')
-  , ehlo = require('../ehlo')
+  // , ehlo = null
   , port = 10026
 ;
 
-describe('ehlo', function() {
-  after(function(done) {
-    ehlo.stop();
-    done();
+function sendMailFixture1(response, callback) {
+  var connection = new SMTPConnection({
+      port: port
+    })
+  ;
+  console.log('trying port : [' + port + ']');
+  callback = callback || function() {};
+  connection.connect(function(err) {
+    assert.strictEqual(err, undefined);
+    connection.send(
+      {
+        from: 'sender@ehlo.io'
+        , to: 'to@ehlo.io'
+      }
+      , fs.readFileSync('./test/fixtures/mail1.eml')
+      , function(error, info) {
+        assert.strictEqual(error, null);
+        if (info) {
+          connection.quit();
+          console.log(info);
+          callback();
+        }
+      }
+    );
   });
+}
+
+describe('ehlo', function() {
   it('ehlo.start', function(done) {
+    var ehlo = require('../ehlo');
     ehlo
       .use(function(mail, smtp) {
         assert.equal(
@@ -22,24 +46,22 @@ describe('ehlo', function() {
 
         smtp.send(250);
 
+        ehlo.stop();
         done();
       })
-      .start({port: port});
-    var connection = new SMTPConnection({
-      port: port
-    });
-    connection.connect(function(err) {
-      assert.strictEqual(err, undefined);
-      connection.send(
-        {
-          from: 'sender@ehlo.io'
-          , to: 'to@ehlo.io'
-        }
-        , fs.readFileSync('./test/fixtures/mail1.eml')
-        , function(error) {
-          assert.strictEqual(error, undefined);
-        }
-      );
-    });
+      .start({port: port})
+    ;
+    sendMailFixture1();
+  });
+
+  it('ehlo.start with string middleware', function(done) {
+    var ehlo = require('../ehlo');
+    assert.throws(
+      function() {
+        ehlo.use('string test');
+      }
+      , TypeError
+    );
+    done();
   });
 });
