@@ -29,4 +29,11 @@ describe('middleware', function() {
       done();
     });
   });
+
+  it('parse', function(done) {
+    var middleware = require('../lib/middleware.parse');
+    middleware({}, {}, function() {
+      done();
+    }
+  });
 });
