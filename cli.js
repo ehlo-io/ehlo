@@ -1,10 +1,11 @@
 #!/usr/bin/env node
 'use strict';
 
-var ehlo = require('./ehlo.js')
+var Ehlo = require('./ehlo.js')
   , program = require('commander')
   , pkg = require('./package.json')
 ;
+
 
 process.argv[1] = 'ehlo';
 program
@@ -18,7 +19,7 @@ program
   .parse(process.argv)
 ;
 
-
+var ehlo = new Ehlo({port: program.port});
 ehlo.use(require('./lib/middleware.parse'));
 
 if (program.api) {
@@ -33,9 +34,7 @@ if (program.api) {
 
 ehlo
   .use(require('./lib/middleware.smtp.250'))
-  .start({
-    port: program.port || 10025
-  })
+  .start()
 ;
 
 process.on('SIGINT', function() {

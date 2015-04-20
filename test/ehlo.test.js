@@ -3,7 +3,7 @@
 var assert = require('assert')
   , fs = require('fs')
   , SMTPConnection = require('smtp-connection')
-  // , ehlo = null
+  , Ehlo = require('../ehlo')
   , port = 10026
 ;
 
@@ -26,7 +26,6 @@ function sendMailFixture1(response, callback) {
         assert.strictEqual(error, null);
         if (info) {
           connection.quit();
-          console.log(info);
           callback();
         }
       }
@@ -36,7 +35,7 @@ function sendMailFixture1(response, callback) {
 
 describe('ehlo', function() {
   it('ehlo.start', function(done) {
-    var ehlo = require('../ehlo');
+    var ehlo = new Ehlo({port: port});
     ehlo
       .use(function(mail, smtp) {
         assert.equal(
@@ -46,16 +45,23 @@ describe('ehlo', function() {
 
         smtp.send(250);
 
-        ehlo.stop();
-        done();
+        ehlo.stop(done);
       })
-      .start({port: port})
+      .start()
     ;
     sendMailFixture1();
   });
 
-  it('ehlo.start with string middleware', function(done) {
-    var ehlo = require('../ehlo');
+  it('ehlo.start without middleware', function(done) {
+    port++;
+    var ehlo = new Ehlo({port: port});
+    // ehlo.start();
+    // sendMailFixture1(null, done);
+    done();
+  });
+
+  it('ehlo.use with string middleware', function(done) {
+    var ehlo = new Ehlo({port: port});
     assert.throws(
       function() {
         ehlo.use('string test');
