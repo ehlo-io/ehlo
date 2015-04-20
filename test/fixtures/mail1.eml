@@ -1,0 +1,6 @@
+from: from@ehlo.io
+to: to@ehlo.io
+Message-ID: <UUID@EHLO.IO>
+subject: SAMPLE
+
+Hello !
