@@ -8,7 +8,8 @@
   },
   "scripts": {
     "start": "./cli.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "NODE_ENV=test ./node_modules/.bin/mocha --colors -R spec --bail",
+    "cover": "./node_modules/istanbul/lib/cli.js cover --report html ./node_modules/mocha/bin/_mocha -- test/*.js -R spec -t 5000"
   },
   "repository": {
     "type": "git",
@@ -35,6 +36,7 @@
   },
   "devDependencies": {
     "istanbul": "^0.3.13",
-    "mocha": "^2.2.4"
+    "mocha": "^2.2.4",
+    "smtp-connection": "^1.2.0"
   }
 }
