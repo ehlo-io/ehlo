@@ -57,6 +57,7 @@ describe('ehlo', function() {
     var ehlo = new Ehlo({port: port});
     ehlo.on('error', function(err) {
       assert.equal(err, 'No middleware matching');
+      ehlo.stop();
       done();
     });
     ehlo.start();
