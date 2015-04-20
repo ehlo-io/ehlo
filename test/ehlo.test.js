@@ -9,21 +9,18 @@ var assert = require('assert')
 
 describe('ehlo', function() {
   after(function(done) {
-    // ehlo.stop();
+    ehlo.stop();
     done();
   });
   it('ehlo.start', function(done) {
     ehlo
-      .use(function(mail, smtp, next) {
-        console.log('received mail');
-        console.log(mail.raw.toString());
-        console.log(
-          fs.readFileSync('./test/fixtures/mail1.eml').toString()
-        );
+      .use(function(mail, smtp) {
         assert.equal(
           mail.raw.toString().replace(/\r\n/g, '\n') + '\n'
           , fs.readFileSync('./test/fixtures/mail1.eml').toString()
         );
+
+        smtp.send(250);
 
         done();
       })
