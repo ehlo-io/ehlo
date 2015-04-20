@@ -57,4 +57,31 @@ describe('middleware', function() {
       done();
     });
   });
+
+  it('smtp return 250', function(done) {
+    var middleware = require('../lib/middleware.smtp.250');
+    middleware(
+      {}
+      , {
+        send: function() {
+          done();
+        }
+      }
+    );
+  });
+
+  it('smtp return 550', function(done) {
+    var middleware = require('../lib/middleware.smtp.550');
+    middleware(
+      {}
+      , {
+        send: function(code, message) {
+          assert.strictEqual(code, 550);
+          assert.equal(message, 'Mailbox unavailable');
+          done();
+        }
+      }
+    );
+  });
+
 });
