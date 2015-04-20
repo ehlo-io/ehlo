@@ -1,0 +1,11 @@
+language: node_js
+node_js:
+  - 0.12
+  - iojs
+env:
+  global:
+    - secure: ""
+before_script:
+  - "echo \"repo_token=\"$COVERALLS_REPO_TOKEN > .coveralls.yml"
+script:
+  - npm test
