@@ -1,11 +1,12 @@
 language: node_js
 node_js:
-  - 0.12
-  - iojs
+- 0.12
+- iojs
 env:
   global:
-    - secure: ""
+  - secure: OM+SbUzZ/E4pGtj9UZ43Rpu0FN7x/AdmWeG/N4EIUVf8KD7I2NaV/XEf2XLJCAiKCCmG1w9KiarFTNymupi1bxTuCL2qEpnpg846kFcL8pxxRyAe7JnAVYLfCapWDZZEJo4iGv+uabmPNONYB/81kGUvIhcFyXxYzLDCYaFBF7s=
 before_script:
-  - "echo \"repo_token=\"$COVERALLS_REPO_TOKEN > .coveralls.yml"
+- echo "repo_token="$COVERALLS_REPO_TOKEN > .coveralls.yml
 script:
-  - npm test
+- npm test
+- npm run codacy
