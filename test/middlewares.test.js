@@ -3,6 +3,7 @@
 var sinon = require('sinon')
   , request = require('request')
   , assert = require('assert')
+  , logger = require('../lib/logger')
 ;
 
 describe('middleware', function() {
@@ -10,6 +11,9 @@ describe('middleware', function() {
     sinon
       .stub(request, 'post')
       .yields(null, {statusCode: 200}, 'STORED;')
+    ;
+    sinon
+      .stub(logger)
     ;
 
     var middleware = require('../lib/middleware.api');
