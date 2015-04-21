@@ -15,7 +15,6 @@ function sendMailFixture1(response, callback) {
       port: port
     })
   ;
-  console.log('trying port : [' + port + ']');
   callback = callback || function() {};
   response = response || 250;
   connection.connect(function(err) {
