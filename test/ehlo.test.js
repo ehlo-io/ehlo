@@ -5,7 +5,10 @@ var assert = require('assert')
   , SMTPConnection = require('smtp-connection')
   , Ehlo = require('../ehlo')
   , port = 10026
+  , sinon = require('sinon')
+  , logger = require('../lib/logger')
 ;
+
 
 function sendMailFixture1(response, callback) {
   var connection = new SMTPConnection({
@@ -42,6 +45,16 @@ function sendMailFixture1(response, callback) {
 }
 
 describe('ehlo', function() {
+  before(function() {
+    sinon.stub(logger, 'info');
+    sinon.stub(logger, 'verbose');
+    sinon.stub(logger, 'debug');
+  });
+  after(function() {
+    logger.info.restore();
+    logger.debug.restore();
+    logger.verbose.restore();
+  });
   it('ehlo.start', function(done) {
     var ehlo = new Ehlo({port: port});
     ehlo

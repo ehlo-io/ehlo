@@ -7,13 +7,21 @@ var sinon = require('sinon')
 ;
 
 describe('middleware', function() {
+  before(function() {
+    sinon.stub(logger, 'info');
+    sinon.stub(logger, 'verbose');
+    sinon.stub(logger, 'debug');
+  });
+  after(function() {
+    logger.info.restore();
+    logger.debug.restore();
+    logger.verbose.restore();
+  });
+
   it('api', function(done) {
     sinon
       .stub(request, 'post')
       .yields(null, {statusCode: 200}, 'STORED;')
-    ;
-    sinon
-      .stub(logger)
     ;
 
     var middleware = require('../lib/middleware.api');
