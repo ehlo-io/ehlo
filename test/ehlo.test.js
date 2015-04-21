@@ -94,7 +94,9 @@ describe('ehlo', function() {
         }
       )
       .start();
-    sendMailFixture1(250, done);
+    sendMailFixture1(250, function() {
+      ehlo.stop(done);
+    });
   });
 
   it('ehlo.start with smtp 550 middleware', function(done) {
@@ -107,7 +109,9 @@ describe('ehlo', function() {
         }
       )
       .start();
-    sendMailFixture1(550, done);
+    sendMailFixture1(550, function() {
+      ehlo.stop(done);
+    });
   });
 
   it('ehlo.use with string middleware', function(done) {
