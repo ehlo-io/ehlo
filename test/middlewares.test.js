@@ -30,7 +30,7 @@ describe('middleware', function() {
         api: 'testapi'
         , json: {from: 'from@ehlo.io'}
       }
-      , {}
+      , {session: {id: 'test'}}
       , function apiCallback() {
         assert.strictEqual(request.post.callCount, 1);
         var args = request.post.args[0][0];
