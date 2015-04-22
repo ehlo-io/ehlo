@@ -39,8 +39,8 @@ For example, if you want to receive emails at `*@example.com`.
 
 ## Contributing
 
-Provite a pull request (with tested code) to include your work in this main project. Issues may be awaiting for help so feel free to give a hand, with code or ideas.
+Provide a pull request (with tested code) to include your work in this main project. Issues may be awaiting for help so feel free to give a hand, with code or ideas.
 
 ## License
-Ehlo is under the MIT licence. Please see 
+Ehlo is under the MIT license. Please see 
 [`LICENSE`](LICENSE)
