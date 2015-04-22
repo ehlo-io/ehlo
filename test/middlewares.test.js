@@ -82,6 +82,20 @@ describe('middleware', function() {
     );
   });
 
+  it('smtp return 421', function(done) {
+    var middleware = require('../lib/middleware.smtp.421');
+    middleware(
+      {}
+      , {
+        send: function(code, message) {
+          assert.strictEqual(code, 421);
+          assert.equal(message, 'Try again later');
+          done();
+        }
+      }
+    );
+  });
+
   it('smtp return 550', function(done) {
     var middleware = require('../lib/middleware.smtp.550');
     middleware(
@@ -95,5 +109,4 @@ describe('middleware', function() {
       }
     );
   });
-
 });
