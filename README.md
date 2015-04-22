@@ -30,6 +30,17 @@ Now send a mail with your favorite lib (like `nodemailer`) with `localhost:10025
 
 Your mail will be send with a POST request to `http://localhost/myAwesomApi`.
 
+## Setting DNS
+If you want to receive *real* emails on your api, you should setup your **DNS RECORDS**.
+For example, if you want to receive emails at *@example.com.
+
+- An MX Record: `example.com MX 10 mx.domain.com`
+- A a record: `mx.subdomain A <ip of your ehlo server>`
+
 ## Contributing
 
 Provite a pull request (with tested code) to include your work in this main project. Issues may be awaiting for help so feel free to give a hand, with code or ideas.
+
+## License
+Ehlo is under the MIT licence. Please see 
+[`LICENSE`](LICENSE)
