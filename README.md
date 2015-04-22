@@ -13,3 +13,23 @@
 [![devDependencies Status](https://img.shields.io/david/dev/ehlo-io/ehlo.svg?style=flat-square)](https://david-dm.org/ehlo-io/ehlo#info=devDependencies)
 [![peerDependencies Status](https://img.shields.io/david/peer/ehlo-io/ehlo.svg?style=flat-square)](https:/david-dm.org/ehlo-io/ehlo#info=peerDependencies)
 
+It's a SMTP server which send every mails to an api in a nice json format
+
+## Install
+
+```bash
+npm i -g ehlo
+```
+
+## Using It
+```
+ehlo -p 10025 -a http://localhost/myAwesomApi
+```
+
+Now send a mail with your favorite lib (like `nodemailer`) with `localhost:10025` as SMTP server.
+
+Your mail will be send with a POST request to `http://localhost/myAwesomApi`.
+
+## Contributing
+
+Provite a pull request (with tested code) to include your work in this main project. Issues may be awaiting for help so feel free to give a hand, with code or ideas.
