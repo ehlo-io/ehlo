@@ -3,6 +3,7 @@
 
 var Ehlo = require('./ehlo.js')
   , program = require('commander')
+  , logger = require('./lib/logger')
   , pkg = require('./package.json')
 ;
 
@@ -16,8 +17,14 @@ program
     , parseInt
   )
   .option('-a, --api [url]', 'The url to post emails')
+  .option('-d, --debug', 'Enable SMTP debug')
   .parse(process.argv)
 ;
+
+logger.transports.console.level = 'verbose';
+if (program.debug) {
+  logger.transports.console.level = 'debug';
+}
 
 var ehlo = new Ehlo({port: program.port});
 ehlo.use(require('./lib/middleware.parse'));
