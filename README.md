@@ -13,7 +13,7 @@
 [![devDependencies Status](https://img.shields.io/david/dev/ehlo-io/ehlo.svg?style=flat-square)](https://david-dm.org/ehlo-io/ehlo#info=devDependencies)
 [![peerDependencies Status](https://img.shields.io/david/peer/ehlo-io/ehlo.svg?style=flat-square)](https:/david-dm.org/ehlo-io/ehlo#info=peerDependencies)
 
-It's a SMTP server which send every mails to an api in a nice json format
+> `Ehlo` is a SMTP server which send every mails to an api in a nice json format
 
 ## Install
 
@@ -32,7 +32,7 @@ Your mail will be send with a POST request to `http://localhost/myAwesomApi`.
 
 ## Setting DNS
 If you want to receive *real* emails on your api, you should setup your **DNS RECORDS**.
-For example, if you want to receive emails at *@example.com.
+For example, if you want to receive emails at `*@example.com`.
 
 - An MX Record: `example.com MX 10 mx.domain.com`
 - A a record: `mx.subdomain A <ip of your ehlo server>`
