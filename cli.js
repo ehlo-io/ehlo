@@ -27,13 +27,28 @@ if (program.debug) {
 }
 
 var ehlo = new Ehlo({port: program.port});
-ehlo.use(require('./lib/middleware.parse'));
+ehlo
+  .use(require('./lib/middleware.parse'))
+  .use(require('./lib/middleware.size'))
+  .use(function(mail, smtp, next) {
+    logger.info(
+      '[%s] New mail (%s) from [%s] to [%s]'
+      , smtp.session.id
+      , mail.size
+      , smtp.session.envelope.mailFrom.address || 'unknow'
+      , smtp.session.envelope.rcptTo[0].address || 'unknow'
+    );
+
+    return next();
+  })
+;
 
 if (program.api) {
   ehlo
     .use(function(mail, smtp, next) {
       mail.api = program.api;
-      next();
+
+      return next();
     })
     .use(require('./lib/middleware.api'))
   ;
