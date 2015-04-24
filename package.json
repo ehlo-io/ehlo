@@ -37,6 +37,7 @@
   "homepage": "https://github.com/opendena/ehlo",
   "dependencies": {
     "commander": "~2.8",
+    "human-size": "~1.1",
     "mailparser": "~0.5",
     "request": "~2.55",
     "smtp-server": "~1.3",

@@ -109,4 +109,33 @@ describe('middleware', function() {
       }
     );
   });
+
+  it('compute empty mail size', function(done) {
+    var middleware = require('../lib/middleware.size')
+      , mail = {raw: ''}
+    ;
+    middleware(
+      mail
+      , {}
+      , function sizeCallback() {
+        assert.strictEqual(mail.size, '0B');
+        done();
+      }
+    );
+  });
+
+  it('compute mail size', function(done) {
+    var middleware = require('../lib/middleware.size')
+      , mail = {}
+    ;
+    mail.raw = require('fs').readFileSync('./test/fixtures/mail1.eml');
+    middleware(
+      mail
+      , {}
+      , function sizeCallback() {
+        assert.strictEqual(mail.size, '86B');
+        done();
+      }
+    );
+  });
 });
