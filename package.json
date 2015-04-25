@@ -32,9 +32,9 @@
   "author": "OpenDena",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/opendena/ehlo/issues"
+    "url": "https://github.com/ehlo-io/ehlo/issues"
   },
-  "homepage": "https://github.com/opendena/ehlo",
+  "homepage": "https://github.com/ehlo-io/ehlo",
   "dependencies": {
     "commander": "~2.8",
     "human-size": "~1.1",
