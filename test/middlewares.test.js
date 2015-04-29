@@ -11,11 +11,13 @@ describe('middleware', function() {
     sinon.stub(logger, 'info');
     sinon.stub(logger, 'verbose');
     sinon.stub(logger, 'debug');
+    sinon.stub(logger, 'error');
   });
   after(function() {
     logger.info.restore();
     logger.debug.restore();
     logger.verbose.restore();
+    logger.error.restore();
   });
 
   it('api', function(done) {
@@ -46,6 +48,64 @@ describe('middleware', function() {
         ;
         done();
       }
+    );
+  });
+
+  it('api with return code 500', function(done) {
+    sinon
+      .stub(request, 'post')
+      .yields(null, {statusCode: 500}, 'STORED;')
+    ;
+
+    var middleware = require('../lib/middleware.api');
+    middleware(
+      {
+        api: 'testapi'
+        , json: {from: 'from@ehlo.io'}
+      }
+      , {
+        session: {id: 'test'}
+        , send: function(code, message) {
+          assert.strictEqual(request.post.callCount, 1);
+          assert.strictEqual(code, 421);
+          assert.strictEqual(message, 'Try again later');
+          request
+            .post
+            .restore()
+          ;
+          done();
+        }
+      }
+      , function apiCallback() {}
+    );
+  });
+
+  it('api with return code 403', function(done) {
+    sinon
+      .stub(request, 'post')
+      .yields(null, {statusCode: 500}, 'STORED;')
+    ;
+
+    var middleware = require('../lib/middleware.api');
+    middleware(
+      {
+        api: 'testapi'
+        , json: {from: 'from@ehlo.io'}
+      }
+      , {
+        session: {id: 'test'}
+        , send: function(code, message) {
+          assert.strictEqual(request.post.callCount, 1);
+          assert.strictEqual(code, 421);
+          assert.strictEqual(message, 'Try again later');
+          request
+            .post
+            .restore()
+          ;
+          done();
+        }
+      }
+      , function apiCallback() {}
     );
   });
 
