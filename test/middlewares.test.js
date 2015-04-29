@@ -11,12 +11,14 @@ describe('middleware', function() {
     sinon.stub(logger, 'info');
     sinon.stub(logger, 'verbose');
     sinon.stub(logger, 'debug');
+    sinon.stub(logger, 'warn');
     sinon.stub(logger, 'error');
   });
   after(function() {
     logger.info.restore();
     logger.debug.restore();
     logger.verbose.restore();
+    logger.warn.restore();
     logger.error.restore();
   });
 
@@ -135,7 +137,8 @@ describe('middleware', function() {
     middleware(
       {}
       , {
-        send: function() {
+        session: {id: 'test'}
+        , send: function() {
           done();
         }
       }
@@ -147,7 +150,8 @@ describe('middleware', function() {
     middleware(
       {}
       , {
-        send: function(code, message) {
+        session: {id: 'test'}
+        , send: function(code, message) {
           assert.strictEqual(code, 421);
           assert.equal(message, 'Try again later');
           done();
@@ -161,7 +165,8 @@ describe('middleware', function() {
     middleware(
       {}
       , {
-        send: function(code, message) {
+        session: {id: 'test'}
+        , send: function(code, message) {
           assert.strictEqual(code, 550);
           assert.equal(message, 'Mailbox unavailable');
           done();
