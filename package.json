@@ -50,6 +50,6 @@
     "istanbul": "~0.3",
     "mocha": "~2.2",
     "sinon": "~1.15",
-    "smtp-connection": "~1.2"
+    "smtp-connection": "~1.3"
   }
 }
