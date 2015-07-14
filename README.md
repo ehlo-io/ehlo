@@ -30,6 +30,11 @@ Now send a mail with your favorite lib (like `nodemailer`) with `localhost:10025
 
 Your mail will be send with a POST request to `http://localhost/myAwesomApi`.
 
+You can also store emails to disk with the `--save [path]` or `-s [path]` option.
+![Demo](save.gif)
+
+For more informations about the json results, look at the [mailparser](https://github.com/andris9/mailparser) library.
+
 ## Setting DNS
 If you want to receive *real* emails on your api, you should setup your **DNS RECORDS**.
 For example, if you want to receive emails at `*@example.com`.
