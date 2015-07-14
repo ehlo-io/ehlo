@@ -17,6 +17,7 @@ program
     , parseInt
   )
   .option('-a, --api [url]', 'The url to post emails')
+  .option('-s, --save [path]', 'Save email in a json file')
   .option('-d, --debug', 'Enable SMTP debug')
   .parse(process.argv)
 ;
@@ -42,6 +43,31 @@ ehlo
     return next();
   })
 ;
+
+if (program.save) {
+  ehlo
+    .use(function(mail, smtp, next) {
+      require('fs')
+        .writeFile(
+          program.save + smtp.session.id + '.json'
+          , JSON.stringify(mail.json, null, '  ')
+          , function(errWrite) {
+            if (errWrite) {
+              logger.error(errWrite);
+              return next();
+            }
+            logger.info(
+              '[%s] Mail json stored in [%s]'
+              , smtp.session.id
+              , program.save + smtp.session.id + '.json'
+            );
+
+            return next();
+          }
+        );
+    })
+  ;
+}
 
 if (program.api) {
   ehlo
