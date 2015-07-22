@@ -28,7 +28,25 @@ ehlo -p 10025 -a http://localhost/myAwesomApi
 
 Now send a mail with your favorite lib (like `nodemailer`) with `localhost:10025` as SMTP server.
 
-Your mail will be send with a POST request to `http://localhost/myAwesomApi`.
+Your mail will be send with a POST request to `http://localhost/myAwesomApi`. All the json is posted in a `mail` form-data variable.
+
+Here a tcpdump of a POST request :
+```
+13:41:45.987903 IP 127.0.0.1.52340 > 127.0.0.1.80: Flags [P.], seq 1:274, ack 1, win 12759, options [nop,nop,TS val 756661265 ecr 756661265], length 273
+E..EP!@.@............t.P8...:jef..1..9.....
+-...-...POST / HTTP/1.1
+host: localhost
+content-type: multipart/form-data; boundary=--------------------------511395648416127300743092
+content-length: 249
+Connection: close
+
+----------------------------511395648416127300743092
+Content-Disposition: form-data; name="mail"
+
+13:41:45.987961 IP 127.0.0.1.52340 > 127.0.0.1.80: Flags [P.], seq 274:422, ack 1, win 12759, options [nop,nop,TS val 756661265 ecr 756661265], length 148
+E...%.@.@............t.P8...:jef..1........
+-...-...{"text":"Just an example\n","headers":{"subject":"Try"},"subject":"Try","priority":"normal"}
+```
 
 You can also store emails to disk with the `--save [path]` or `-s [path]` option.
 ![Demo](save.gif)
