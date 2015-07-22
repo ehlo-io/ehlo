@@ -33,9 +33,14 @@ ehlo
   .use(require('./lib/middleware.size'))
   .use(function(mail, smtp, next) {
     logger.info(
-      '[%s] New mail (%s) from [%s] to [%s]'
+      '[%s] Ip [%s] send new mail (%s)'
       , smtp.session.id
+      , smtp.session.remoteAddress
       , mail.size
+    );
+    logger.info(
+      '[%s] Mail from [%s] to [%s]'
+      , smtp.session.id
       , smtp.session.envelope.mailFrom.address || 'unknow'
       , smtp.session.envelope.rcptTo[0].address || 'unknow'
     );
