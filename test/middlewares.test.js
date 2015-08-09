@@ -6,7 +6,7 @@ var sinon = require('sinon')
   , logger = require('../lib/logger')
 ;
 
-describe('middleware', function() {
+describe('middlewares', function() {
   before(function() {
     sinon.stub(logger, 'info');
     sinon.stub(logger, 'verbose');
@@ -28,7 +28,7 @@ describe('middleware', function() {
       .yields(null, {statusCode: 200}, 'STORED;')
     ;
 
-    var middleware = require('../lib/middleware.api');
+    var middleware = require('../lib/middleware/api')();
     middleware(
       {
         api: 'testapi'
@@ -59,7 +59,7 @@ describe('middleware', function() {
       .yields(null, {statusCode: 500}, 'STORED;')
     ;
 
-    var middleware = require('../lib/middleware.api');
+    var middleware = require('../lib/middleware/api')();
     middleware(
       {
         api: 'testapi'
@@ -88,7 +88,7 @@ describe('middleware', function() {
       .yields(null, {statusCode: 500}, 'STORED;')
     ;
 
-    var middleware = require('../lib/middleware.api');
+    var middleware = require('../lib/middleware/api')();
     middleware(
       {
         api: 'testapi'
@@ -112,7 +112,7 @@ describe('middleware', function() {
   });
 
   it('parse', function(done) {
-    var middleware = require('../lib/middleware.parse')
+    var middleware = require('../lib/middleware/parse')()
       , mail = {};
     mail.raw = require('fs').readFileSync('./test/fixtures/mail1.eml');
     middleware(mail, {}, function parseCallback() {
@@ -133,7 +133,7 @@ describe('middleware', function() {
   });
 
   it('smtp return 250', function(done) {
-    var middleware = require('../lib/middleware.smtp.250');
+    var middleware = require('../lib/middleware/smtp')(250);
     middleware(
       {}
       , {
@@ -146,7 +146,10 @@ describe('middleware', function() {
   });
 
   it('smtp return 421', function(done) {
-    var middleware = require('../lib/middleware.smtp.421');
+    var middleware = require('../lib/middleware/smtp')(
+      421
+      , 'Try again later'
+    );
     middleware(
       {}
       , {
@@ -161,7 +164,10 @@ describe('middleware', function() {
   });
 
   it('smtp return 550', function(done) {
-    var middleware = require('../lib/middleware.smtp.550');
+    var middleware = require('../lib/middleware/smtp')(
+      550
+      , 'Mailbox unavailable'
+    );
     middleware(
       {}
       , {
@@ -176,7 +182,7 @@ describe('middleware', function() {
   });
 
   it('compute empty mail size', function(done) {
-    var middleware = require('../lib/middleware.size')
+    var middleware = require('../lib/middleware/size')()
       , mail = {raw: ''}
     ;
     middleware(
@@ -190,7 +196,7 @@ describe('middleware', function() {
   });
 
   it('compute mail size', function(done) {
-    var middleware = require('../lib/middleware.size')
+    var middleware = require('../lib/middleware/size')()
       , mail = {}
     ;
     mail.raw = require('fs').readFileSync('./test/fixtures/mail1.eml');

@@ -29,8 +29,8 @@ if (program.debug) {
 
 var ehlo = new Ehlo({port: program.port});
 ehlo
-  .use(require('./lib/middleware.parse'))
-  .use(require('./lib/middleware.size'))
+  .use(require('./lib/middleware/parse')())
+  .use(require('./lib/middleware/size')())
   .use(function(mail, smtp, next) {
     logger.info(
       '[%s] Ip [%s] send new mail (%s)'
@@ -81,12 +81,12 @@ if (program.api) {
 
       return next();
     })
-    .use(require('./lib/middleware.api'))
+    .use(require('./lib/middleware/api')())
   ;
 }
 
 ehlo
-  .use(require('./lib/middleware.smtp.250'))
+  .use(require('./lib/middleware/smtp')(250))
   .start()
 ;
 
