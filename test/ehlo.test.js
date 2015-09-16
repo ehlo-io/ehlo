@@ -13,6 +13,7 @@ var assert = require('assert')
 function sendMailFixture1(response, callback) {
   var connection = new SMTPConnection({
       port: port
+      , ignoreTLS: true
     })
   ;
   callback = callback || function() {};
